@@ -2,6 +2,9 @@
 import RegisterButton from 'src/components/RegisterButton.vue'
 import AccountMenu from 'src/components/AccountMenu.vue'
 import UserAvatar from 'src/components/UserAvatar.vue'
+import { ref } from 'vue'
+
+const authenticated = ref(false)
 </script>
 
 <template>
@@ -10,23 +13,28 @@ import UserAvatar from 'src/components/UserAvatar.vue'
       <q-toolbar>
         <q-toolbar-title>
           Quasar App
+          <q-btn
+            label="toggle authenticated"
+            no-caps
+            @click="authenticated = !authenticated"
+          />
         </q-toolbar-title>
 
-        <RegisterButton
-          v-if="false"
-          label="register"
-          unelevated
-          color="secondary"
-        />
-
         <q-btn
-          v-else
+          v-if="authenticated"
           round
           dense
         >
           <UserAvatar />
           <AccountMenu />
         </q-btn>
+
+        <RegisterButton
+          v-else
+          label="register"
+          unelevated
+          color="secondary"
+        />
       </q-toolbar>
     </q-header>
 
